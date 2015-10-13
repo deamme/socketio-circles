@@ -14,7 +14,7 @@ var TAU = 2*Math.PI;
 var players = [];
 var playerID;
 var playerRadius = 20;
-var playerColor = "#333333";
+//var playerColor = "#333333";
 var backgroundColor = "#CCCCCC";
 
 document.addEventListener("keydown", function(e) {
@@ -43,7 +43,7 @@ document.addEventListener("keydown", function(e) {
 drawPlayer = function(player){
 	context.beginPath();
 	context.arc(player.x,player.y,playerRadius,0,TAU);
-	context.fillStyle = playerColor;
+	context.fillStyle = player.color;
 	context.fill();
 }
 
