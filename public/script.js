@@ -79,7 +79,7 @@ socket.on('update', function(players) {
 });
 
 //Game loop
-while (true) {
+(gameLoop = function() {
 	var deltaX = 0, deltaY = 0;
 
 	if (bKeyLeft)
@@ -104,4 +104,6 @@ while (true) {
 	}
 
 	draw();
-}
+
+	window.requestAnimationFrame(gameLoop);
+})();
