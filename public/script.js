@@ -14,7 +14,7 @@ var TAU = 2*Math.PI;
 var players = [];
 var playerRadius = 20;
 var playerColor = "333333";
-var backgroundColor = "CCCCCC"
+var backgroundColor = "CCCCCC";
 
 drawPlayer = function(player){
 	context.beginPath();
@@ -26,8 +26,8 @@ drawPlayer = function(player){
 
 draw = function(){
 	//Draw background
-	ctx.fillStyle = backgroundColor;
-	ctx.fillRect(0,0,width,height);
+	context.fillStyle = backgroundColor;
+	context.fillRect(0,0,width,height);
 
 	//Draw players
 	players.forEach(function(player) {
