@@ -22,13 +22,14 @@ randomMinMax = function(min, max){
 
 spawnPlayer = function(socketID){
     var player = {};
-    var hex = (random() * (Math.pow(16,6) - 1)).toString(16);
+    var hex = Math.floor(Math.random() * (Math.pow(16,6) - 1)).toString(16);
+    console.log(hex);
     while(hex.length < 6){
     	hex = "0" + hex;
     }
     player.color = "#" + hex;
-    player.x = random() * width;
-    player.y = random() * height;
+    player.x = Math.random() * width;
+    player.y = Math.random() * height;
     player.id = socketID;
 
     return player;
