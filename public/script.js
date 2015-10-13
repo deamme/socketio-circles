@@ -21,10 +21,15 @@ drawPlayer = function(player){
 }
 
 draw = function(){
-	fillRect();
+	//fillRect();
 	for (player in players) {
 		drawPlayer(player);
 	}
 }
 
 var socket = io.connect();
+
+socket.on('newPlayer', function(player) {
+	players.push(player);
+	draw();
+});
