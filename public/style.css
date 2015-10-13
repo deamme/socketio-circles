@@ -1,9 +1,16 @@
 body {
-	background-color: #222222;
+	text-align: center;
+	vertical-align: center;
 }
 
-#testlabel {
-	font-size: 50px;
-	font-weight: bold;
-	color: #DDDDDD;
+#controls {
+	width: 100%;
+}
+
+#textField {
+	width: auto;
+}
+
+#sendButton {
+	width: auto;
 }
