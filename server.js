@@ -30,7 +30,10 @@ spawnPlayer = function(socketID){
 }
 
 io.on('connection', function (socket) {
-    players.push(spawnPlayer(socket.id));
+    // socket.broadcast
+    var newPlayer = spawnPlayer(socket.id);
+    socket.emit('newPlayer', newPlayer);
+    players.push(newPlayer);
     console.log(players);
     socket.on('disconnect', function() {
         players.forEach(function(element, index) {
