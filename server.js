@@ -46,6 +46,15 @@ io.on('connection', function (socket) {
         socket.broadcast.emit('update', players);
         console.log(players);
     });
+    socket.on('positionUpdate', function(position) {
+        players.forEach(function(element, index) {
+            if (element.id === socket.id) {
+                element.x = position.x;
+                element.y = position.y;
+                socket.broadcast.emit('update', players);
+            }
+        });
+    });
 });
 
 server.listen(3000);
