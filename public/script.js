@@ -77,7 +77,7 @@ var socket = io.connect();
 socket.on('update', function(players) {
 	window.players = players;
 });
-
+var counter = 0;
 //Game loop
 lastMillis = performance.now();
 (gameLoop = function() {
@@ -93,18 +93,19 @@ lastMillis = performance.now();
 		deltaY++;
 
     var delta = performance.now() - lastMillis;
+    lastMillis = lastMillis + delta;
     
     if (deltaX != 0 || deltaY != 0){
 		players.forEach(function(element, index) {
     	    if (element.id === socket.id) {
     	        players[index].x += deltaX * (delta/deltaDivisor);
     	        players[index].y += deltaY * (delta/deltaDivisor);
-    	        socket.emit('positionUpdate', {x: players[index].x, y: players[index].y});
+    	        socket.emit('positionUpdate', [players[index].x, players[index].y]);
+                counter++;
+                console.log(counter);
     	    }
     	});
 	}
-
-    lastMillis = lastMillis + delta;
 
 	draw();
 

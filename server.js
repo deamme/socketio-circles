@@ -54,8 +54,8 @@ io.on('connection', function (socket) {
     socket.on('positionUpdate', function(position) {
         players.forEach(function(element, index) {
             if (element.id === socket.id) {
-                players[index].x = position.x;
-                players[index].y = position.y;
+                players[index].x = position[0];
+                players[index].y = position[1];
                 socket.broadcast.emit('update', players);
             }
         });
