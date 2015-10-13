@@ -2,15 +2,3 @@ body {
 	text-align: center;
 	vertical-align: center;
 }
-
-#controls {
-	width: 100%;
-}
-
-#textField {
-	width: auto;
-}
-
-#sendButton {
-	width: auto;
-}
