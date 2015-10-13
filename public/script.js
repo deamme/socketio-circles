@@ -13,17 +13,23 @@ var context = canvas.getContext("2d");
 var TAU = 2*Math.PI;
 var players = [];
 var playerRadius = 20;
+var playerColor = "333333";
+var backgroundColor = "CCCCCC"
 
 drawPlayer = function(player){
 	context.beginPath();
 	context.arc(player.x,player.y,playerRadius,0,TAU);
-	context.fillStyle = "#444444";
+	context.fillStyle = playerColor;
 	context.fill();
 	context.stroke();
 }
 
 draw = function(){
-	//fillRect();
+	//Draw background
+	ctx.fillStyle = backgroundColor;
+	ctx.fillRect(0,0,width,height);
+
+	//Draw players
 	for (player in players) {
 		drawPlayer(player);
 	}
@@ -31,7 +37,7 @@ draw = function(){
 
 var socket = io.connect();
 
-socket.on('newPlayer', function(player) {
-	players.push(player);
+socket.on('update', function(players) {
+	window.players = players;
 	draw();
 });
