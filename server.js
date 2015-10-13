@@ -32,7 +32,6 @@ spawnPlayer = function(socketID){
 io.on('connection', function (socket) {
     var player = spawnPlayer(socket.id);
     players.push(player);
-    socket.emit('myPlayerID', player.id)
     socket.emit('update', players);
     socket.broadcast.emit('update', players);
     console.log(players);
@@ -49,8 +48,8 @@ io.on('connection', function (socket) {
     socket.on('positionUpdate', function(position) {
         players.forEach(function(element, index) {
             if (element.id === socket.id) {
-                element.x = position.x;
-                element.y = position.y;
+                players[index].x = position.x;
+                players[index].y = position.y;
                 socket.broadcast.emit('update', players);
             }
         });

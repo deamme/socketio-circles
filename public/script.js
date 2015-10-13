@@ -18,8 +18,8 @@ var playerColor = "#333333";
 var backgroundColor = "#CCCCCC";
 
 document.addEventListener("keydown", function(e) {
-	var deltaX, deltaY;
-	
+	var deltaX = 0, deltaY = 0;
+
 	if (e.keyCode === 37)
 		deltaX--;
 	if (e.keyCode === 38)
@@ -30,12 +30,14 @@ document.addEventListener("keydown", function(e) {
 		deltaY++;
 
 	players.forEach(function(element, index) {
-        if (element.id === playerID) {
+        if (element.id === socket.id) {
             players[index].x += deltaX;
             players[index].y += deltaY;
             socket.emit('positionUpdate', {x: players[index].x, y: players[index].y});
         }
     });
+
+    draw();
 }, false);
 
 drawPlayer = function(player){
@@ -57,10 +59,6 @@ draw = function(){
 }
 
 var socket = io.connect();
-
-socket.on('myPlayerID', function(playerID) {
-	window.playerID = playerID;
-});
 
 socket.on('update', function(players) {
 	window.players = players;
