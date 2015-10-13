@@ -26,3 +26,5 @@ draw = function(){
 		drawPlayer(player);
 	}
 }
+
+var socket = io.connect();
