@@ -30,9 +30,9 @@ draw = function(){
 	ctx.fillRect(0,0,width,height);
 
 	//Draw players
-	for (player in players) {
-		drawPlayer(player);
-	}
+	players.forEach(function(player) {
+        drawPlayer(player);
+    });
 }
 
 var socket = io.connect();

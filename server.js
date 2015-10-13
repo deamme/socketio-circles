@@ -30,10 +30,9 @@ spawnPlayer = function(socketID){
 }
 
 io.on('connection', function (socket) {
-    // socket.broadcast
-    var newPlayer = spawnPlayer(socket.id);
-    socket.emit('newPlayer', newPlayer);
-    players.push(newPlayer);
+    players.push(spawnPlayer(socket.id));
+    socket.emit('update', players);
+    socket.broadcast.emit('update', players);
     console.log(players);
     socket.on('disconnect', function() {
         players.forEach(function(element, index) {
@@ -41,6 +40,8 @@ io.on('connection', function (socket) {
                 players.splice(index, 1);
             }
         });
+        socket.emit('update', players);
+        socket.broadcast.emit('update', players);
         console.log(players);
     });
 });
