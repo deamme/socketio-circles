@@ -11,6 +11,8 @@ app.get('/test', function(req,res){
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
+var players = [];
+
 randomMinMax = function(min, max){
     return Math.random() * (max - min) + min;
 }
@@ -25,10 +27,8 @@ spawnPlayer = function(){
 }
 
 io.on('connection', function (socket) {
-    socket.emit('news', { hello: 'world' });
-        socket.on('my other event', function (data) {
-            console.log(data);
-    });
+    players.push(spawnPlayer());
+    console.log(players);
 });
 
 server.listen(3000);
