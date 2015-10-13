@@ -13,15 +13,14 @@ var context = canvas.getContext("2d");
 var TAU = 2*Math.PI;
 var players = [];
 var playerRadius = 20;
-var playerColor = "333333";
-var backgroundColor = "CCCCCC";
+var playerColor = "#333333";
+var backgroundColor = "#CCCCCC";
 
 drawPlayer = function(player){
 	context.beginPath();
 	context.arc(player.x,player.y,playerRadius,0,TAU);
 	context.fillStyle = playerColor;
 	context.fill();
-	context.stroke();
 }
 
 draw = function(){
