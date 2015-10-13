@@ -30,7 +30,9 @@ spawnPlayer = function(socketID){
 }
 
 io.on('connection', function (socket) {
-    players.push(spawnPlayer(socket.id));
+    var player = spawnPlayer(socket.id);
+    players.push(player);
+    socket.emit('myPlayerID', player.id)
     socket.emit('update', players);
     socket.broadcast.emit('update', players);
     console.log(players);
