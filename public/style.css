@@ -1,0 +1,9 @@
+body {
+	background-color: #222222;
+}
+
+#testlabel {
+	font-size: 50px;
+	font-weight: bold;
+	color: #DDDDDD;
+}
