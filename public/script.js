@@ -16,8 +16,8 @@ var playerID;
 var playerRadius = 20;
 //var playerColor = "#333333";
 var backgroundColor = "#CCCCCC";
-var lastMillis = performance.now();
-var deltaDivisor = 100;
+var lastMillis;
+var deltaDivisor = 20;
 var bKeyUp, bKeyDown, bKeyLeft, bKeyRight;
 
 document.addEventListener("keydown", function(e) {
@@ -79,6 +79,7 @@ socket.on('update', function(players) {
 });
 
 //Game loop
+lastMillis = performance.now();
 (gameLoop = function() {
 	window.requestAnimationFrame(gameLoop);
 
@@ -93,19 +94,21 @@ socket.on('update', function(players) {
 	if (bKeyDown)
 		deltaY++;
 
-	if (deltaX != 0 && deltaY != 0){
+    var delta = performance.now() - lastMillis;
+    
+    if (deltaX != 0 && deltaY != 0){
 		players.forEach(function(element, index) {
     	    if (element.id === socket.id) {
-    	    	var delta = performance.now() - lastMillis;
     	        players[index].x += deltaX * (delta/deltaDivisor);
     	        players[index].y += deltaY * (delta/deltaDivisor);
     	        socket.emit('positionUpdate', {x: players[index].x, y: players[index].y});
-    	        lastMillis = lastMillis + delta;
     	    }
     	});
 	}
 
+    lastMillis = lastMillis + delta;
+
 	draw();
 
-	gameLoop();
+	// gameLoop();
 })();
