@@ -15,9 +15,11 @@ var players = [];
 var playerRadius = 20;
 
 drawPlayer = function(player){
+	context.beginPath();
 	context.arc(player.x,player.y,playerRadius,0,TAU);
 	context.fillStyle = "#444444";
 	context.fill();
+	context.stroke();
 }
 
 draw = function(){
