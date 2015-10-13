@@ -31,8 +31,8 @@ spawnPlayer = function(socketID){
 
 io.on('connection', function (socket) {
     players.push(spawnPlayer(socket.id));
-    socket.emit('updatePlayers', players);
-    socket.broadcast.emit('updatePlayers', players);
+    socket.emit('update', players);
+    socket.broadcast.emit('update', players);
     console.log(players);
     socket.on('disconnect', function() {
         players.forEach(function(element, index) {
@@ -40,8 +40,8 @@ io.on('connection', function (socket) {
                 players.splice(index, 1);
             }
         });
-        socket.emit('deletePlayer', players);
-        socket.broadcast.emit('deletePlayer', players);
+        socket.emit('update', players);
+        socket.broadcast.emit('update', players);
         console.log(players);
     });
 });
