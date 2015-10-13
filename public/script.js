@@ -80,6 +80,8 @@ socket.on('update', function(players) {
 
 //Game loop
 (gameLoop = function() {
+	window.requestAnimationFrame(gameLoop);
+
 	var deltaX = 0, deltaY = 0;
 
 	if (bKeyLeft)
@@ -105,5 +107,5 @@ socket.on('update', function(players) {
 
 	draw();
 
-	window.requestAnimationFrame(gameLoop);
+	gameLoop();
 })();
