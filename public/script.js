@@ -61,8 +61,6 @@ socket.on("connect", function(){
 	var t0 = performance.now();
 	socket.emit("serverSync");
 
-	var counter = 0;
-
 	var toServerTime = function(millis) {
 		return millis + t_offset;
 	}
@@ -98,7 +96,6 @@ socket.on("connect", function(){
 	    		deltaX: players[SOCKET_ID].deltaX,
 	    		deltaY: players[SOCKET_ID].deltaY
 	    });
-		//console.log(++counter);
 	}
 
 	//Game loop
