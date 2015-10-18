@@ -3,8 +3,8 @@ var canvas = document.getElementById("canvas");
 //Set size
 var WIDTH = 500;
 var HEIGHT = 500;
-canvas.setAttribute("width",WIDTH);
-canvas.setAttribute("height",HEIGHT);
+canvas.setAttribute("width", WIDTH);
+canvas.setAttribute("height", HEIGHT);
 
 //Set context
 var context = canvas.getContext("2d");
@@ -16,14 +16,19 @@ var PLAYER_RADIUS = 10;
 var BACKGROUND_COLOR = "#CCCCCC";
 var t_offset;
 var DELTA_DIVISOR = 8;
-var keyLeft = false, keyUp = false, keyRight = false, keyDown = false;
+var keyLeft = false,
+	keyUp = false,
+	keyRight = false,
+	keyDown = false;
 var lastDeltaX, lastDeltaY;
 var SOCKET_ID;
 var once = true;
 
+var counter = 0;
+
 var socket = io.connect();
 
-socket.on("connect", function(){
+socket.on("connect", function() {
 	SOCKET_ID = socket.id;
 
 	socket.on("playerList", function(playerList) {
@@ -32,7 +37,7 @@ socket.on("connect", function(){
 
 	socket.on("playerConnected", function(playerID, player) {
 		players[playerID] = player;
-		
+
 		console.log(player);
 	});
 
@@ -90,12 +95,13 @@ socket.on("connect", function(){
 
 	var emitPositionUpdate = function() {
 		socket.emit("positionUpdate", {
-	    		x: players[SOCKET_ID].x,
-	    		y: players[SOCKET_ID].y,
-	    		lastMillis: players[SOCKET_ID].lastMillis,
-	    		deltaX: players[SOCKET_ID].deltaX,
-	    		deltaY: players[SOCKET_ID].deltaY
-	    });
+			x: players[SOCKET_ID].x,
+			y: players[SOCKET_ID].y,
+			lastMillis: players[SOCKET_ID].lastMillis,
+			deltaX: players[SOCKET_ID].deltaX,
+			deltaY: players[SOCKET_ID].deltaY
+		});
+		console.log(++counter);
 	}
 
 	//Game loop
@@ -112,22 +118,22 @@ socket.on("connect", function(){
 	var addListeners = function() {
 		document.addEventListener("keydown", function(e) {
 			updateLastDeltas();
-			switch(e.keyCode){
-			case (37):
-				keyLeft = true;
-				break;
-			case (38):
-				keyUp = true;
-				break;
-			case (39):
-				keyRight = true;
-				break;
-			case (40):
-				keyDown = true;
-				break;
+			switch (e.keyCode) {
+				case (37):
+					keyLeft = true;
+					break;
+				case (38):
+					keyUp = true;
+					break;
+				case (39):
+					keyRight = true;
+					break;
+				case (40):
+					keyDown = true;
+					break;
 			}
 			updateDeltas();
-			if(deltasChanged()){
+			if (deltasChanged()) {
 				players[SOCKET_ID].lastMillis = toServerTime(performance.now());
 				emitPositionUpdate();
 			}
@@ -135,22 +141,22 @@ socket.on("connect", function(){
 
 		document.addEventListener("keyup", function(e) {
 			updateLastDeltas();
-			switch(e.keyCode){
-			case (37):
-				keyLeft = false;
-				break;
-			case (38):
-				keyUp = false;
-				break;
-			case (39):
-				keyRight = false;
-				break;
-			case (40):
-				keyDown = false;
-				break;
+			switch (e.keyCode) {
+				case (37):
+					keyLeft = false;
+					break;
+				case (38):
+					keyUp = false;
+					break;
+				case (39):
+					keyRight = false;
+					break;
+				case (40):
+					keyDown = false;
+					break;
 			}
 			updateDeltas();
-			if(deltasChanged()) {
+			if (deltasChanged()) {
 				players[SOCKET_ID].lastMillis = toServerTime(performance.now());
 				emitPositionUpdate();
 			}
@@ -160,7 +166,7 @@ socket.on("connect", function(){
 	var gameLoop = function() {
 		//calculatePredictedPositions();
 		draw();
-	    window.requestAnimationFrame(gameLoop);
+		window.requestAnimationFrame(gameLoop);
 	}
 
 	var draw = function() {
@@ -180,15 +186,6 @@ socket.on("connect", function(){
 		var x = player.x + (player.deltaX * ((toServerTime(now) - player.lastMillis) / DELTA_DIVISOR));
 		var y = player.y + (player.deltaY * ((toServerTime(now) - player.lastMillis) / DELTA_DIVISOR));
 
-		if (x > 500) {
-			console.log("x: " + x);
-			console.log("player.x: " + player.x);
-			console.log("player.deltaX: " + player.deltaX);
-			console.log("(toServerTime(now) - player.lastMillis)" + (toServerTime(now) - player.lastMillis));
-			console.log("player.lastMillis: " + player.lastMillis);
-			console.log("t_offset: " + t_offset);
-		}
-
 		if (playerID === SOCKET_ID) {
 			player.x = x;
 			player.y = y;
@@ -197,11 +194,11 @@ socket.on("connect", function(){
 
 		context.beginPath();
 		context.arc(
-				x,
-				y,
-				PLAYER_RADIUS,
-				0,
-				MATH_TAU
+			x,
+			y,
+			PLAYER_RADIUS,
+			0,
+			MATH_TAU
 		);
 		context.fillStyle = player.color;
 		context.fill();
