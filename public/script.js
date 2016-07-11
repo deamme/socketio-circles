@@ -13,7 +13,7 @@ var context = canvas.getContext("2d");
 var MATH_TAU = 2 * Math.PI;
 var players;
 var PLAYER_RADIUS = 10;
-var BACKGROUND_COLOR = "#CCCCCC";
+var BACKGROUND_COLOR = "#BBBBBB";
 var t_offset;
 var DELTA_DIVISOR = 8;
 var keyLeft = false,
