@@ -40,6 +40,7 @@ initPlayer = function(socketID) {
 }
 
 io.on("connection", function(socket) {
+    var clientIP = socket.request.connection.remoteAddress;
     var player = initPlayer(socket.id);
     socket.broadcast.emit("playerConnected", socket.id, player);
 
