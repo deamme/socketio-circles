@@ -76,6 +76,9 @@ socket.on("connect", function() {
 	}
 
 	var updateDeltas = function() {
+		players[SOCKET_ID].deltaX = 0;
+		players[SOCKET_ID].deltaY = 0;
+
 		if (keyLeft) players[SOCKET_ID].deltaX = -1;
 		if (keyUp) players[SOCKET_ID].deltaY = -1;
 		if (keyRight) players[SOCKET_ID].deltaX = 1;
