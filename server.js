@@ -55,7 +55,16 @@ hslToRgb = function(h, s, l) {
         b = hue2rgb(p, q, h - 1/3);
     }
 
-    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    var rHex = Math.floor(r).toString(16);
+    var gHex = Math.floor(g).toString(16);
+    var bHex = Math.floor(b).toString(16);
+
+    if (rHex.length == 1) rHex = "0" + rHex;
+    if (gHex.length == 1) gHex = "0" + gHex;
+    if (bHex.length == 1) bHex = "0" + bHex;
+
+    return ("#" + rHex + gHex + bHex);
+    //return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 }
 
 getRandomColor = function() {
