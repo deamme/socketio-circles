@@ -1,3 +1,12 @@
+* {
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer */
+    -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+    -webkit-user-select: none; /* Chrome, Safari, and Opera */
+    -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
+    cursor:	default;
+}
+
 body {
 	text-align: center;
 	vertical-align: center;
@@ -10,19 +19,26 @@ canvas {
 
 p {
 	font-family: 'Open Sans', sans-serif;
-	font-style: bold;
+	font-weight: bold;
+
+	-moz-user-select: text; /* Firefox */
+    -ms-user-select: text; /* Internet Explorer */
+    -khtml-user-select: text; /* KHTML browsers (e.g. Konqueror) */
+    -webkit-user-select: text; /* Chrome, Safari, and Opera */
+    -webkit-touch-callout: text; /* Disable Android and iOS callouts*/
+    cursor:	text;
 }
 
 #welcome {
 	font-family: 'Montserrat', sans-serif;
-	font-style: normal;
+	font-weight: bold;
 	font-size: 1.5em;
 	margin: 0;
 }
 
 #title {
 	font-family: 'Montserrat', sans-serif;
-	font-style: bold;
+	font-weight: normal;
 	font-size: 4em;
 	margin: 0;
 }
