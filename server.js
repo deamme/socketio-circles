@@ -9,8 +9,8 @@ var io = require("socket.io")(server);
 
 var players = {};
 
-var width = 800;
-var height = 800;
+var width = 700;
+var height = 700;
 
 randomMinMax = function(min, max) {
     return Math.random() * (max - min) + min;
@@ -55,9 +55,9 @@ hslToRgb = function(h, s, l) {
         b = hue2rgb(p, q, h - 1/3);
     }
 
-    var rHex = Math.floor(r).toString(16);
-    var gHex = Math.floor(g).toString(16);
-    var bHex = Math.floor(b).toString(16);
+    var rHex = Math.floor(r * 256).toString(16);
+    var gHex = Math.floor(g * 256).toString(16);
+    var bHex = Math.floor(b * 256).toString(16);
 
     if (rHex.length == 1) rHex = "0" + rHex;
     if (gHex.length == 1) gHex = "0" + gHex;

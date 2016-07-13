@@ -1,8 +1,8 @@
 var canvas = document.getElementById("canvas");
 
 //Set size
-var WIDTH = 500;
-var HEIGHT = 500;
+var WIDTH = 700;
+var HEIGHT = 700;
 canvas.setAttribute("width", WIDTH);
 canvas.setAttribute("height", HEIGHT);
 
@@ -13,7 +13,7 @@ var context = canvas.getContext("2d");
 var MATH_TAU = 2 * Math.PI;
 var players;
 var PLAYER_RADIUS = 10;
-var BACKGROUND_COLOR = "#BBBBBB";
+var BACKGROUND_COLOR = "#EEEEEE";
 var t_offset;
 var DELTA_DIVISOR = 8;
 var keyLeft = false,
