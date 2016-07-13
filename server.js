@@ -100,8 +100,8 @@ io.on("connection", function(socket) {
     players[socket.id] = player;
     socket.emit("playerList", players);
 
-    console.log("Players:");
-    console.log(players);
+    //console.log("Players:");
+    //console.log(players);
 
     socket.on("serverSync", function() {
         socket.emit("serverSync", process.hrtime());
@@ -119,7 +119,7 @@ io.on("connection", function(socket) {
     socket.on("disconnect", function() {
         delete players[socket.id];
         socket.broadcast.emit("playerDisconnected", socket.id);
-        console.log(players);
+        //console.log(players);
     });
 });
 
