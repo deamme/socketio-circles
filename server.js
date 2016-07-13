@@ -9,8 +9,8 @@ var io = require("socket.io")(server);
 
 var players = {};
 
-var width = 700;
-var height = 700;
+var width = 650;
+var height = 650;
 
 randomMinMax = function(min, max) {
     return Math.random() * (max - min) + min;

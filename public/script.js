@@ -1,8 +1,8 @@
 var canvas = document.getElementById("canvas");
 
 //Set size
-var WIDTH = 700;
-var HEIGHT = 700;
+var WIDTH = 650;
+var HEIGHT = 650;
 canvas.setAttribute("width", WIDTH);
 canvas.setAttribute("height", HEIGHT);
 
