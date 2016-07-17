@@ -39,7 +39,7 @@ socket.on("adminRequestResponse", function (response) {
 });
 
 socket.on("connect", function() {
-	SOCKET_ID = socket.id;
+	SOCKET_ID = '/#' + socket.id;
 
 	socket.on("playerList", function(playerList) {
 		players = playerList;
