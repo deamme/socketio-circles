@@ -28,6 +28,16 @@ var once = true;
 
 var socket = io.connect();
 
+var requestAdmin = function(passphrase) {
+	socket.emit("adminRequest", passphrase);
+}
+
+socket.on("adminRequestResponse", function (response) {
+	if (response) {
+		players[SOCKET_ID].admin = true;
+	}
+});
+
 socket.on("connect", function() {
 	SOCKET_ID = socket.id;
 
@@ -196,7 +206,13 @@ socket.on("connect", function() {
 			0,
 			MATH_TAU
 		);
-		context.fillStyle = player.color;
-		context.fill();
+		if (players[playerID].admin) {
+			context.strokeStyle = player.color;
+			context.lineWidth = 5;
+			context.stroke();
+		} else {
+			context.fillStyle = player.color;
+			context.fill();
+		}
 	}
 });

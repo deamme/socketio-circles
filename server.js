@@ -88,6 +88,7 @@ initPlayer = function(socketID) {
     player.deltaY = 0;
     player.lastMillis = hrtimeToMillis(process.hrtime());
     player.color = getRandomColor();
+    player.admin = false;
 
     return player;
 }
@@ -105,6 +106,14 @@ io.on("connection", function(socket) {
 
     socket.on("serverSync", function() {
         socket.emit("serverSync", process.hrtime());
+    });
+
+    socket.on("adminRequest", function(passphrase) {
+        if (passphrase == "testkode") { //Mmmmh, hard coded passwords in open source software!
+        	players[socket.id].admin = true;
+        	socket.emit("adminRequestResponse", true);
+        	socket.broadcast.emit("positionUpdate", socket.id, players[socket.id]);
+        }
     });
 
     socket.on("positionUpdate", function(player) {
