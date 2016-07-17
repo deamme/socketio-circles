@@ -24,7 +24,7 @@ var lastDeltaX, lastDeltaY;
 var SOCKET_ID;
 var once = true;
 
-var counter = 0;
+//var counter = 0;
 
 var socket = io.connect();
 
@@ -38,7 +38,7 @@ socket.on("connect", function() {
 	socket.on("playerConnected", function(playerID, player) {
 		players[playerID] = player;
 
-		console.log(player);
+		//console.log(player);
 	});
 
 	socket.on("positionUpdate", function(playerID, player) {
@@ -97,7 +97,7 @@ socket.on("connect", function() {
 			deltaX: players[SOCKET_ID].deltaX,
 			deltaY: players[SOCKET_ID].deltaY
 		});
-		console.log(++counter);
+		//console.log(++counter);
 	}
 
 	//Game loop
