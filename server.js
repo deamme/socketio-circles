@@ -9,8 +9,9 @@ var io = require("socket.io")(server);
 
 var players = {};
 
-var width = 600;
-var height = 600;
+var WIDTH = 600;
+var HEIGHT = 600;
+var RADIUS = 10;
 
 randomMinMax = function(min, max) {
     return Math.random() * (max - min) + min;
@@ -82,8 +83,8 @@ getRandomColor = function() {
 initPlayer = function(socketID) {
     var player = {};
 
-    player.x = Math.random() * width;
-    player.y = Math.random() * height;
+    player.x = randomMinMax(RADIUS, WIDTH - RADIUS);
+    player.y = randomMinMax(RADIUS, HEIGHT - RADIUS);
     player.deltaX = 0;
     player.deltaY = 0;
     player.lastMillis = hrtimeToMillis(process.hrtime());

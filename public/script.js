@@ -12,7 +12,7 @@ var context = canvas.getContext("2d");
 //Public variables
 var MATH_TAU = 2 * Math.PI;
 var players;
-var PLAYER_RADIUS = 10;
+var RADIUS = 10;
 var BACKGROUND_COLOR = "#EEEEEE";
 var t_offset;
 var DELTA_DIVISOR = 8;
@@ -192,6 +192,11 @@ socket.on("connect", function() {
 		var x = player.x + (player.deltaX * ((toServerTime(now) - player.lastMillis) / DELTA_DIVISOR));
 		var y = player.y + (player.deltaY * ((toServerTime(now) - player.lastMillis) / DELTA_DIVISOR));
 
+		if (x < RADIUS) x = RADIUS;
+		if (y < RADIUS) y = RADIUS;
+		if (x > WIDTH - RADIUS) x = WIDTH - RADIUS;
+		if (y > HEIGHT - RADIUS) y = HEIGHT - RADIUS;
+
 		if (playerID === SOCKET_ID) {
 			player.x = x;
 			player.y = y;
@@ -199,16 +204,10 @@ socket.on("connect", function() {
 		}
 
 		context.beginPath();
-		context.arc(
-			x,
-			y,
-			PLAYER_RADIUS,
-			0,
-			MATH_TAU
-		);
+		context.arc(x, y, RADIUS, 0, MATH_TAU);
 		if (players[playerID].admin) {
 			context.strokeStyle = player.color;
-			context.lineWidth = 5;
+			context.lineWidth = RADIUS/4;
 			context.stroke();
 		} else {
 			context.fillStyle = player.color;
